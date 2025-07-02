@@ -1,0 +1,66 @@
+{
+  "daily-phrases": {
+    "2024-03-20": {
+      "date": "2024-03-20",
+      "generatedAt": "2024-03-20T11:00:00.000Z",
+      "phrases": {
+        "ansioso": [
+          "La ansiedad es temporal, pero tu determinación es permanente 💪",
+          "Cada documento enviado es un paso más cerca de tu meta 📄",
+          "Respira profundo, tu visa está en proceso y eso es progreso 🌟"
+        ],
+        "esperanzado": [
+          "Tu esperanza está construyendo puentes hacia tu futuro ✈️",
+          "Hoy puede ser el día de las buenas noticias 📧",
+          "La esperanza es el combustible de los valientes 🚀"
+        ],
+        "frustrado": [
+          "La frustración de hoy es la historia de superación de mañana 📖",
+          "Es normal sentir frustración, es señal de que te importa 💝",
+          "Cada 'no' te acerca más al 'sí' definitivo 🗝️"
+        ],
+        "optimista": [
+          "Tu optimismo está acelerando el universo a tu favor 🌈",
+          "¡Esa actitud positiva es tu mejor carta de presentación! ⭐",
+          "Los optimistas como tú escriben las mejores historias de éxito 📝"
+        ],
+        "cansado": [
+          "El cansancio es la medalla de los valientes 🏅",
+          "Descansa, los grandes viajes requieren pausas estratégicas 🛌",
+          "Tu cansancio es prueba de tu esfuerzo, no de debilidad 💜"
+        ],
+        "determinado": [
+          "Tu determinación está moviendo montañas burocráticas 🏔️",
+          "Esa determinación tuya es imparable, igual que tu visa 🎯",
+          "Los determinados como tú siempre encuentran el camino 🛤️"
+        ]
+      }
+    }
+  },
+  "mood-stats": {
+    "2024-03-20": {
+      "ansioso": 45,
+      "esperanzado": 30,
+      "frustrado": 10,
+      "optimista": 10,
+      "cansado": 3,
+      "determinado": 2
+    }
+  },
+  "users": {
+    "user123": {
+      "lastMood": "esperanzado",
+      "lastUpdate": "2024-03-20T15:30:00.000Z",
+      "moodHistory": [
+        {
+          "mood": "ansioso",
+          "date": "2024-03-19T10:00:00.000Z"
+        },
+        {
+          "mood": "esperanzado",
+          "date": "2024-03-20T15:30:00.000Z"
+        }
+      ]
+    }
+  }
+}

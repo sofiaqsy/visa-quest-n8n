@@ -1,0 +1,82 @@
+{
+  "name": "Daily Phrases Generator for Firebase",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24,
+              "triggerAtHour": 6
+            }
+          ]
+        }
+      },
+      "name": "Daily Trigger 6AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "position": [250, 300],
+      "typeVersion": 1,
+      "id": "trigger"
+    },
+    {
+      "parameters": {
+        "functionCode": "// Definir los moods disponibles\nconst moods = [\n  'ansioso',\n  'esperanzado',\n  'frustrado',\n  'optimista',\n  'cansado',\n  'determinado'\n];\n\n// Fecha de hoy\nconst today = new Date();\nconst dateStr = today.toISOString().split('T')[0];\n\n// Banco de frases por mood (sin IA)\nconst phrasesBank = {\n  ansioso: [\n    'La ansiedad es temporal, pero tu determinación es permanente 💪',\n    'Cada documento enviado es un paso más cerca de tu meta 📄',\n    'Respira profundo, tu visa está en proceso y eso es progreso 🌟',\n    'Tu ansiedad demuestra cuánto significa esto para ti 💝',\n    'Los procesos toman tiempo, pero tu paciencia será recompensada ⏳'\n  ],\n  esperanzado: [\n    'Tu esperanza está construyendo puentes hacia tu futuro ✈️',\n    'Hoy puede ser el día de las buenas noticias 📧',\n    'La esperanza es el combustible de los valientes 🚀',\n    'Mantener la esperanza es ya una victoria diaria 🌅',\n    'Tu esperanza ilumina no solo tu camino, sino el de otros ✨'\n  ],\n  frustrado: [\n    'La frustración de hoy es la historia de superación de mañana 📖',\n    'Es normal sentir frustración, es señal de que te importa 💝',\n    'Cada no te acerca más al sí definitivo 🗝️',\n    'Tu frustración es válida, úsala como combustible 🔥',\n    'Los procesos difíciles forjan personas extraordinarias 💎'\n  ],\n  optimista: [\n    'Tu optimismo está acelerando el universo a tu favor 🌈',\n    '¡Esa actitud positiva es tu mejor carta de presentación! ⭐',\n    'Los optimistas como tú escriben las mejores historias de éxito 📝',\n    'Tu energía positiva está abriendo puertas invisibles 🚪',\n    'El optimismo es el idioma universal del éxito 🌐'\n  ],\n  cansado: [\n    'El cansancio es la medalla de los valientes 🏅',\n    'Descansa, los grandes viajes requieren pausas estratégicas 🛌',\n    'Tu cansancio es prueba de tu esfuerzo, no de debilidad 💜',\n    'Hasta los héroes necesitan recargar energías 🔋',\n    'El descanso también es parte del proceso, no lo subestimes 🌙'\n  ],\n  determinado: [\n    'Tu determinación está moviendo montañas burocráticas 🏔️',\n    'Esa determinación tuya es imparable, igual que tu visa 🎯',\n    'Los determinados como tú siempre encuentran el camino 🛤️',\n    'Tu determinación inspira a todos los que te rodean 🌟',\n    'Con esa determinación, el éxito es cuestión de tiempo ⏰'\n  ]\n};\n\n// Seleccionar 3 frases aleatorias para cada mood\nconst dailyPhrases = {\n  date: dateStr,\n  generatedAt: new Date().toISOString(),\n  phrases: {}\n};\n\nmoods.forEach(mood => {\n  const moodPhrases = phrasesBank[mood];\n  const selectedPhrases = [];\n  const indices = [];\n  \n  // Seleccionar 3 frases aleatorias sin repetir\n  while (selectedPhrases.length < 3) {\n    const randomIndex = Math.floor(Math.random() * moodPhrases.length);\n    if (!indices.includes(randomIndex)) {\n      indices.push(randomIndex);\n      selectedPhrases.push(moodPhrases[randomIndex]);\n    }\n  }\n  \n  dailyPhrases.phrases[mood] = selectedPhrases;\n});\n\nreturn [{ json: dailyPhrases }];"
+      },
+      "name": "Generate Daily Phrases",
+      "type": "n8n-nodes-base.function",
+      "position": [450, 300],
+      "typeVersion": 1,
+      "id": "generate"
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://YOUR-PROJECT.firebaseio.com/daily-phrases/{{$json.date}}.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpQueryAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "",
+              "value": ""
+            }
+          ]
+        },
+        "options": {},
+        "bodyParametersJson": "={{$json}}"
+      },
+      "name": "Save to Firebase",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [650, 300],
+      "typeVersion": 3,
+      "id": "firebase",
+      "notes": "Remember to update YOUR-PROJECT with your actual Firebase project ID"
+    }
+  ],
+  "connections": {
+    "Daily Trigger 6AM": {
+      "main": [
+        [
+          {
+            "node": "Generate Daily Phrases",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Daily Phrases": {
+      "main": [
+        [
+          {
+            "node": "Save to Firebase",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
