@@ -1,0 +1,66 @@
+{
+  "name": "visa-quest-n8n",
+  "description": "n8n automation for daily motivational phrases",
+  "repository": "https://github.com/sofiaqsy/visa-quest-n8n",
+  "logo": "https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png",
+  "keywords": ["n8n", "automation", "workflow", "visa-quest"],
+  "stack": "container",
+  "env": {
+    "N8N_BASIC_AUTH_ACTIVE": {
+      "description": "Enable basic authentication",
+      "value": "true"
+    },
+    "N8N_BASIC_AUTH_USER": {
+      "description": "Basic auth username",
+      "value": "admin"
+    },
+    "N8N_BASIC_AUTH_PASSWORD": {
+      "description": "Basic auth password",
+      "generator": "secret"
+    },
+    "N8N_HOST": {
+      "description": "n8n host (will be set automatically)",
+      "value": "0.0.0.0"
+    },
+    "N8N_PORT": {
+      "description": "Port for n8n",
+      "value": "5678"
+    },
+    "N8N_PROTOCOL": {
+      "description": "Protocol to use",
+      "value": "https"
+    },
+    "NODE_ENV": {
+      "description": "Node environment",
+      "value": "production"
+    },
+    "WEBHOOK_URL": {
+      "description": "Webhook URL (will be set after deploy)",
+      "value": "https://your-app-name.herokuapp.com/"
+    },
+    "GENERIC_TIMEZONE": {
+      "description": "Timezone for cron jobs",
+      "value": "America/Lima"
+    },
+    "N8N_ENCRYPTION_KEY": {
+      "description": "Key to encrypt credentials",
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "addons": [
+    {
+      "plan": "heroku-postgresql:mini"
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}

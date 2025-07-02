@@ -1,0 +1,16 @@
+{
+  "name": "visa-quest-n8n",
+  "version": "1.0.0",
+  "description": "n8n automation for visa-quest daily phrases",
+  "main": "index.js",
+  "scripts": {
+    "start": "n8n start",
+    "start:tunnel": "n8n start --tunnel"
+  },
+  "dependencies": {
+    "n8n": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
