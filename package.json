@@ -2,10 +2,10 @@
   "name": "visa-quest-n8n",
   "version": "1.0.0",
   "description": "n8n automation for visa-quest daily phrases",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "start": "n8n start",
-    "start:tunnel": "n8n start --tunnel",
+    "start": "node server.js",
+    "start:dev": "n8n start --tunnel",
     "heroku-postbuild": "echo 'Skip build on Heroku'"
   },
   "dependencies": {
